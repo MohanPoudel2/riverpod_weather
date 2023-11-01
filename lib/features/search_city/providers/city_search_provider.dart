@@ -6,7 +6,7 @@ import 'package:riverpod_wheather_app/features/search_city/providers/state/searc
 import 'package:dio/dio.dart';
 
 class CitySearchProvider extends Notifier<CitySearchState> {
-  CitySearchState citySearchState = CitySearchLoading();
+  CitySearchState citySearchState = CitySearchForm();
 
   @override
   build() {
@@ -17,14 +17,18 @@ class CitySearchProvider extends Notifier<CitySearchState> {
   late final CitySearchService _citySearchService = CitySearchService(_dio);
 
   void searchCity(String name) async {
-    citySearchState =CitySearchLoading();
+    state = CitySearchLoading();
     try {
       SearchCityResult searchCityResult = await _citySearchService.searchCity(
           name: name, count: 10, language: 'en', format: 'json');
-      citySearchState=CitySearchSuccess(searchCityResult);
-    }
-    catch(e){
-      citySearchState=CitySearchFailed(e.toString());
+      state = CitySearchSuccess(searchCityResult);
+    } catch (e) {
+      state = CitySearchFailed(e.toString());
     }
   }
 }
+
+NotifierProvider<CitySearchProvider, CitySearchState> citySearchProvider =
+    NotifierProvider(() {
+  return CitySearchProvider();
+});
