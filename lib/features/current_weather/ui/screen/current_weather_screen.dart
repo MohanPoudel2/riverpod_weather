@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_wheather_app/features/current_weather/data/current_weather_model.dart';
@@ -36,6 +37,7 @@ class _CurrentWeatherScreenState extends ConsumerState<CurrentWeatherScreen> {
         body: Stack(
       children: [
         _weatherWidget(currentWeatherState),
+        if(!kIsWeb)
         SafeArea(
             child: IconButton(
                 onPressed: () {

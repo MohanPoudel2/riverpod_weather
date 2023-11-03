@@ -44,7 +44,13 @@ class _CitySearchScreenState extends ConsumerState<CitySearchScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              keyboardType: TextInputType.url,
               controller: _citySearchTextController,
+              onSubmitted: (str){
+                if(str.isNotEmpty){
+                  provider.searchCity(str);
+                }
+              },
               decoration:  InputDecoration(
                   labelText: 'Please enter your city name',
                   suffixIcon: IconButton(onPressed: (){
@@ -70,7 +76,7 @@ class _CitySearchScreenState extends ConsumerState<CitySearchScreen> {
         CitySearchForm()=>const Text('Please select a city'),
       CitySearchLoading()=>const CircularProgressIndicator(),
       CitySearchSuccess(searchCityResult:SearchCityResult searchCityResult)=>CityListWidget(searchCityResult: searchCityResult),
-      CitySearchFailed(errorMessage:String error)=>const Text('Error')
+      CitySearchFailed(errorMessage:String error)=> Text(error)
 
       }
     );

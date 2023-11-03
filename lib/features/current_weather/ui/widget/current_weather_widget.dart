@@ -45,7 +45,7 @@ class CurrentWeatherWidget extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '${current.currentWeather?.weathercode?.toCondition().toEmoji()}',
-                    style: const TextStyle(fontSize: 40),
+                    style: const TextStyle(fontSize: 40,color: Colors.white),
                   ),
                 ),
               ),
